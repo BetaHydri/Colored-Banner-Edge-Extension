@@ -227,20 +227,20 @@ RedBanner-Extension/
 **Top Position (Default)**
 ```
 ┌────────────────────────────────┐
-│  ● PRODUCTION - RED           │ ← Banner
+│  ● PRODUCTION - RED            │ ← Banner
 ├────────────────────────────────┤
-│  Website content              │
-│                               │
+│  Website content               │
+│                                │
 └────────────────────────────────┘
 ```
 
 **Bottom Position**
 ```
 ┌────────────────────────────────┐
-│  Website content              │
-│                               │
+│  Website content               │
+│                                │
 ├────────────────────────────────┤
-│  ● TESTING - BLUE             │ ← Banner
+│  ● TESTING - BLUE              │ ← Banner
 └────────────────────────────────┘
 ```
 
