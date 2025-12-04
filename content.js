@@ -1,9 +1,38 @@
-// Dynamic banner injection with customizable settings
+/**
+ * Content Script for Red Banner Edge Extension
+ * 
+ * This script is injected into all web pages and manages:
+ * - Dynamic banner creation and injection
+ * - Banner styling based on user settings
+ * - Page margin adjustments to prevent content overlap
+ * - Real-time updates when settings change
+ * - Support for multiple banner positions (top, bottom, left, right)
+ */
+
+// Self-executing function to avoid polluting global namespace
 (function() {
+  /**
+   * Reference to the current banner element in the DOM
+   * @type {HTMLElement|null}
+   */
   let bannerElement = null;
+  
+  /**
+   * Current banner settings loaded from Chrome storage
+   * @type {object|null}
+   */
   let settings = null;
 
-  // Default settings
+  /**
+   * Default banner configuration used as fallback
+   * @type {object}
+   * @property {boolean} visible - Whether banner should be displayed
+   * @property {string} primaryColor - Primary gradient color
+   * @property {string} secondaryColor - Secondary gradient color
+   * @property {string} position - Banner position on page
+   * @property {string} bannerText - Text to display in banner
+   * @property {string|null} logoData - Base64 encoded logo image
+   */
   const defaultSettings = {
     visible: true,
     primaryColor: '#ff0000',
@@ -13,7 +42,16 @@
     logoData: null
   };
 
-  // Load settings and create banner
+  /**
+   * Initializes the banner system
+   * Loads settings from Chrome storage and creates banner if visible
+   * Falls back to default settings if loading fails
+   * This is the main entry point called on page load
+   * 
+   * @async
+   * @function init
+   * @returns {Promise<void>}
+   */
   async function init() {
     try {
       const result = await chrome.storage.local.get('bannerSettings');
@@ -29,7 +67,15 @@
     }
   }
 
-  // Create banner element
+  /**
+   * Creates and configures the banner DOM element
+   * Removes any existing banner before creating a new one
+   * Applies styling based on current settings
+   * Injects the banner into the page
+   * 
+   * @function createBanner
+   * @returns {void}
+   */
   function createBanner() {
     if (bannerElement) {
       bannerElement.remove();
@@ -57,7 +103,19 @@
     inject();
   }
 
-  // Get banner styles based on position
+  /**
+   * Generates complete CSS styles for the banner
+   * Combines base styles with position-specific styles
+   * Handles all four positions: top, bottom, left, right
+   * 
+   * @function getBannerStyles
+   * @returns {object} Object containing style strings for banner elements
+   * @returns {string} returns.banner - Complete CSS for banner container
+   * @returns {string} returns.logo - CSS for logo image element
+   * @returns {string} returns.indicator - CSS for animated status indicator dot
+   * @returns {string} returns.text - CSS for banner text
+   * @returns {string} returns.animation - CSS keyframe animations
+   */
   function getBannerStyles() {
     const baseStyles = {
       common: `
@@ -167,7 +225,14 @@
     };
   }
 
-  // Get body margin styles based on banner position
+  /**
+   * Generates CSS to adjust page body margins based on banner position
+   * Prevents banner from covering page content
+   * Adds appropriate margin (40px) on the side where banner appears
+   * 
+   * @function getBodyStyles
+   * @returns {string} CSS string with body margin adjustment
+   */
   function getBodyStyles() {
     switch (settings.position) {
       case 'top':
@@ -183,7 +248,15 @@
     }
   }
 
-  // Darken color for borders
+  /**
+   * Darkens a hex color by reducing RGB component values
+   * Used to create darker borders that complement the banner colors
+   * Reduces each RGB component by 40, ensuring values stay >= 0
+   * 
+   * @function darkenColor
+   * @param {string} color - Hex color string (e.g., '#ff0000')
+   * @returns {string} Darkened hex color string
+   */
   function darkenColor(color) {
     // Simple darkening by reducing RGB values
     const hex = color.replace('#', '');
@@ -193,7 +266,15 @@
     return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
   }
 
-  // Wait for body to exist and inject
+  /**
+   * Injects the banner element into the page DOM
+   * Waits for document.body to exist before injecting
+   * Retries every 10ms if body is not yet available
+   * Inserts banner as first child of body to ensure visibility
+   * 
+   * @function inject
+   * @returns {void}
+   */
   function inject() {
     if (document.body) {
       document.body.insertBefore(bannerElement, document.body.firstChild);
@@ -202,7 +283,19 @@
     }
   }
 
-  // Listen for settings changes
+  /**
+   * Listens for changes to banner settings in Chrome storage
+   * Automatically updates or removes banner when settings change
+   * Handles visibility toggle by adding/removing banner
+   * Resets body margin when banner is hidden
+   * 
+   * @function
+   * @param {object} changes - Object with changed storage keys
+   * @param {object} changes.bannerSettings - Updated banner settings
+   * @param {object} changes.bannerSettings.newValue - New settings value
+   * @param {string} areaName - Storage area name ('local', 'sync', etc.)
+   * @returns {void}
+   */
   chrome.storage.onChanged.addListener((changes, areaName) => {
     if (areaName === 'local' && changes.bannerSettings) {
       settings = changes.bannerSettings.newValue || defaultSettings;

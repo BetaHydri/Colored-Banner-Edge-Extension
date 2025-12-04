@@ -1,4 +1,21 @@
-// Color templates
+/**
+ * Options Page Controller for Red Banner Edge Extension
+ * 
+ * This file manages the user interface for configuring banner settings including:
+ * - Color templates and custom colors
+ * - Banner position (top, bottom, left, right)
+ * - Banner text customization
+ * - Logo upload and management
+ * - Visibility toggle
+ * - Live preview of changes
+ */
+
+/**
+ * Predefined color templates for quick banner styling
+ * Each template provides primary and secondary colors for gradient backgrounds
+ * 
+ * @type {Array<{name: string, primary: string, secondary: string}>}
+ */
 const colorTemplates = [
   { name: 'Red Alert', primary: '#ff0000', secondary: '#cc0000' },
   { name: 'Orange Warning', primary: '#ff6600', secondary: '#cc5200' },
@@ -12,7 +29,18 @@ const colorTemplates = [
   { name: 'Gray Neutral', primary: '#666666', secondary: '#4d4d4d' }
 ];
 
-// Default settings
+/**
+ * Default banner settings used for initialization and reset functionality
+ * 
+ * @type {object}
+ * @property {boolean} visible - Whether the banner is visible on pages
+ * @property {string} primaryColor - Primary gradient color in hex format
+ * @property {string} secondaryColor - Secondary gradient color in hex format
+ * @property {string} position - Banner position ('top', 'bottom', 'left', 'right')
+ * @property {string} bannerText - Text displayed in the banner
+ * @property {string|null} logoData - Base64 encoded logo image data
+ * @property {string} selectedTemplate - Name of the selected color template
+ */
 const defaultSettings = {
   visible: true,
   primaryColor: '#ff0000',
@@ -42,9 +70,21 @@ const saveBtn = document.getElementById('saveBtn');
 const resetBtn = document.getElementById('resetBtn');
 const toast = document.getElementById('toast');
 
+/**
+ * Current banner settings being edited
+ * Initialized as a copy of defaultSettings to avoid mutation
+ * 
+ * @type {object}
+ */
 let currentSettings = { ...defaultSettings };
 
-// Initialize
+/**
+ * Initialize the options page when DOM is ready
+ * Loads saved settings, renders template options, sets up event listeners, and shows preview
+ * 
+ * @async
+ * @returns {Promise<void>}
+ */
 document.addEventListener('DOMContentLoaded', async () => {
   await loadSettings();
   renderTemplates();
@@ -52,7 +92,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   updatePreview();
 });
 
-// Load settings from storage
+/**
+ * Loads banner settings from Chrome local storage
+ * Merges loaded settings with defaults to ensure all properties exist
+ * Falls back to default settings if loading fails
+ * 
+ * @async
+ * @function loadSettings
+ * @returns {Promise<void>}
+ * @throws Will log error to console if storage access fails
+ */
 async function loadSettings() {
   try {
     const result = await chrome.storage.local.get('bannerSettings');
@@ -65,7 +114,13 @@ async function loadSettings() {
   }
 }
 
-// Apply loaded settings to UI
+/**
+ * Applies the current settings to all UI form elements
+ * Updates toggles, input values, selects, and preview elements to reflect loaded settings
+ * 
+ * @function applySettingsToUI
+ * @returns {void}
+ */
 function applySettingsToUI() {
   // Visibility toggle
   visibilityToggle.classList.toggle('active', currentSettings.visible);
@@ -90,7 +145,14 @@ function applySettingsToUI() {
   }
 }
 
-// Render color templates
+/**
+ * Renders all color template cards in the UI
+ * Creates clickable gradient cards for each predefined template
+ * Marks the currently selected template with 'selected' class
+ * 
+ * @function renderTemplates
+ * @returns {void}
+ */
 function renderTemplates() {
   templatesContainer.innerHTML = '';
   colorTemplates.forEach(template => {
@@ -112,7 +174,18 @@ function renderTemplates() {
   });
 }
 
-// Select a template
+/**
+ * Selects a color template and applies its colors to current settings
+ * Updates both the settings object and UI inputs
+ * Clears previous selection and marks new template as selected
+ * 
+ * @function selectTemplate
+ * @param {object} template - The template object to select
+ * @param {string} template.name - Display name of the template
+ * @param {string} template.primary - Primary hex color value
+ * @param {string} template.secondary - Secondary hex color value
+ * @returns {void}
+ */
 function selectTemplate(template) {
   currentSettings.selectedTemplate = template.name;
   currentSettings.primaryColor = template.primary;
@@ -132,7 +205,20 @@ function selectTemplate(template) {
   updatePreview();
 }
 
-// Setup event listeners
+/**
+ * Sets up all event listeners for interactive UI elements
+ * Handles:
+ * - Visibility toggle clicks
+ * - Color picker changes (switches to 'Custom' template)
+ * - Position dropdown changes
+ * - Banner text input
+ * - Logo file upload
+ * - Logo removal
+ * - Save and reset buttons
+ * 
+ * @function setupEventListeners
+ * @returns {void}
+ */
 function setupEventListeners() {
   // Visibility toggle
   visibilityToggle.addEventListener('click', () => {
@@ -142,7 +228,7 @@ function setupEventListeners() {
     updatePreview();
   });
   
-  // Color inputs
+  // Color inputs - switching to custom template when colors are manually changed
   primaryColorInput.addEventListener('input', (e) => {
     currentSettings.primaryColor = e.target.value;
     currentSettings.selectedTemplate = 'Custom';
@@ -187,7 +273,17 @@ function setupEventListeners() {
   resetBtn.addEventListener('click', resetSettings);
 }
 
-// Handle logo upload
+/**
+ * Handles logo file upload with validation and conversion
+ * Validates file size (max 100KB) before processing
+ * Converts image to base64 data URL for storage
+ * Updates preview with uploaded image
+ * 
+ * @function handleLogoUpload
+ * @param {Event} e - File input change event
+ * @param {FileList} e.target.files - Selected file(s) from input
+ * @returns {void}
+ */
 function handleLogoUpload(e) {
   const file = e.target.files[0];
   if (!file) return;
@@ -209,7 +305,15 @@ function handleLogoUpload(e) {
   reader.readAsDataURL(file);
 }
 
-// Update preview
+/**
+ * Updates the live preview banner to reflect current settings
+ * Shows how the banner will appear on web pages
+ * Displays grayed out message if banner is hidden
+ * Includes position hint in preview text
+ * 
+ * @function updatePreview
+ * @returns {void}
+ */
 function updatePreview() {
   if (!currentSettings.visible) {
     previewBanner.style.opacity = '0.3';
@@ -242,7 +346,17 @@ function updatePreview() {
   previewText.textContent = `${currentSettings.bannerText} ${positionHints[currentSettings.position]}`;
 }
 
-// Save settings
+/**
+ * Saves current settings to Chrome storage and applies them to all tabs
+ * Reloads all open tabs to apply the new banner settings
+ * Shows success/error toast notification based on result
+ * Ignores reload errors for restricted pages (chrome://, etc.)
+ * 
+ * @async
+ * @function saveSettings
+ * @returns {Promise<void>}
+ * @throws Will show error toast if save operation fails
+ */
 async function saveSettings() {
   try {
     await chrome.storage.local.set({ bannerSettings: currentSettings });
@@ -264,7 +378,16 @@ async function saveSettings() {
   }
 }
 
-// Reset settings
+/**
+ * Resets all settings to factory defaults with user confirmation
+ * Prompts user for confirmation before resetting
+ * Updates UI, saves to storage, and shows confirmation toast
+ * 
+ * @async
+ * @function resetSettings
+ * @returns {Promise<void>}
+ * @throws Will log error to console if reset operation fails
+ */
 async function resetSettings() {
   if (!confirm('Are you sure you want to reset all settings to default?')) {
     return;
@@ -283,7 +406,16 @@ async function resetSettings() {
   }
 }
 
-// Show toast notification
+/**
+ * Displays a toast notification message to the user
+ * Toast automatically disappears after 3 seconds
+ * Supports success (green) and error (red) styling
+ * 
+ * @function showToast
+ * @param {string} message - Message text to display in the toast
+ * @param {boolean} [isError=false] - Whether this is an error message (changes background color)
+ * @returns {void}
+ */
 function showToast(message, isError = false) {
   toast.textContent = message;
   toast.style.background = isError ? '#f44336' : '#4CAF50';
