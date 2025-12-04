@@ -220,31 +220,37 @@ RedBanner-Extension/
 ├── TERMINAL-SERVER-SETUP.md      # Terminal Server configuration
 ├── MULTI-APP-CONFIGURATION.md    # Multi-app profile setup (NEW)
 └── README.md                     # This file
-```──────────────────────────────┐
-│  ● PRODUCTION - RED           │ ← Banner
+```
+
+### Banner Positions
+
+**Top Position (Default)**
+```
+┌────────────────────────────────┐
+│  ● PRODUCTION - RED                   │ ← Banner
 ├────────────────────────────────┤
-│  Website content              │
-│                               │
+│  Website content                      │
+│                                       │
 └────────────────────────────────┘
 ```
 
 **Bottom Position**
 ```
 ┌────────────────────────────────┐
-│  Website content              │
-│                               │
+│  Website content                      │
+│                                       │
 ├────────────────────────────────┤
-│  ● TESTING - BLUE             │ ← Banner
+│  ● TESTING - BLUE                     │ ← Banner
 └────────────────────────────────┘
 ```
 
 **Left Side Position**
 ```
 ┌──┬────────────────────────────┐
-│ D│                            │
-│ E│  Website content           │
-│ V│                            │
-│ ●│                            │
+│ D│                                   │
+│ E│  Website content                  │
+│ V│                                   │
+│ ●│                                   │
 └──┴────────────────────────────┘
   ↑ Banner
 ```
@@ -252,12 +258,12 @@ RedBanner-Extension/
 **Right Side Position**
 ```
 ┌────────────────────────────┬──┐
-│                            │U │
-│  Website content           │A │
-│                            │T │
-│                            │● │
+│                                  │U │
+│  Website content                 │A │
+│                                  │T │
+│                                  │● │
 └────────────────────────────┴──┘
-                            ↑ Banner
+                                     ↑ Banner
 ```
 
 ### Advanced Customization (Manual)
