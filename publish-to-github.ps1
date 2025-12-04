@@ -7,7 +7,8 @@ Write-Host ""
 # Check if git is installed
 try {
     git --version | Out-Null
-} catch {
+}
+catch {
     Write-Host "ERROR: Git is not installed. Please install Git first." -ForegroundColor Red
     Write-Host "Download from: https://git-scm.com/download/win" -ForegroundColor Yellow
     exit 1
