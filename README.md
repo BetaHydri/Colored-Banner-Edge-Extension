@@ -5,6 +5,9 @@ A highly customizable Microsoft Edge extension that displays a visible banner on
 ![Version](https://img.shields.io/badge/version-3.1.0-red)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Edge](https://img.shields.io/badge/Edge-Chromium-blue)
+![Author](https://img.shields.io/badge/author-Jan%20Tiedemann-blue)
+
+**Author:** Jan Tiedemann
 
 ## 🎯 Use Case
 
@@ -478,6 +481,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Basic theme switching
 
 ---
+
+**Author:** Jan Tiedemann
 
 **Made with ❤️ for Terminal Server administrators**
 
