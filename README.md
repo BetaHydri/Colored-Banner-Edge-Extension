@@ -227,30 +227,30 @@ RedBanner-Extension/
 **Top Position (Default)**
 ```
 ┌────────────────────────────────┐
-│  ● PRODUCTION - RED            │ ← Banner
+│  ● PRODUCTION - RED                   │ ← Banner
 ├────────────────────────────────┤
-│  Website content               │
-│                                │
+│  Website content                      │
+│                                       │
 └────────────────────────────────┘
 ```
 
 **Bottom Position**
 ```
 ┌────────────────────────────────┐
-│  Website content               │
-│                                │
+│  Website content                      │
+│                                       │
 ├────────────────────────────────┤
-│  ● TESTING - BLUE              │ ← Banner
+│  ● TESTING - BLUE                     │ ← Banner
 └────────────────────────────────┘
 ```
 
 **Left Side Position**
 ```
 ┌──┬────────────────────────────┐
-│ D│                            │
-│ E│  Website content           │
-│ V│                            │
-│ ●│                            │
+│ D│                                   │
+│ E│  Website content                  │
+│ V│                                   │
+│ ●│                                   │
 └──┴────────────────────────────┘
   ↑ Banner
 ```
@@ -258,12 +258,12 @@ RedBanner-Extension/
 **Right Side Position**
 ```
 ┌────────────────────────────┬──┐
-│                            │U │
-│  Website content           │A │
-│                            │T │
-│                            │● │
+│                                  │U │
+│  Website content                 │A │
+│                                  │T │
+│                                  │● │
 └────────────────────────────┴──┘
-                            ↑ Banner
+                                     ↑ Banner
 ```
 
 ### Advanced Customization (Manual)
