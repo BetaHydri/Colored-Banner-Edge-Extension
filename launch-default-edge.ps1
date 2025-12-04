@@ -1,0 +1,15 @@
+# Launch default Edge WITHOUT red branding
+# This uses the default profile without the extension
+
+param(
+    [string]$Url = "about:blank"
+)
+
+# Launch Edge with default profile (no extension loaded)
+Start-Process "msedge.exe" -ArgumentList @(
+    "--profile-directory=Default",
+    "--no-first-run",
+    $Url
+)
+
+Write-Host "Launched DEFAULT Edge Browser (no branding)" -ForegroundColor Gray
