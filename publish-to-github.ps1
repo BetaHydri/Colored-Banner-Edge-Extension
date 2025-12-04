@@ -70,9 +70,9 @@ Write-Host "   - DON'T initialize with README (we already have one)" -Foreground
 Write-Host ""
 Write-Host "2. Copy your GitHub repository URL (shown after creation)" -ForegroundColor White
 Write-Host ""
-Write-Host "3. Run these commands (replace YOUR_USERNAME with your GitHub username):" -ForegroundColor White
-Write-Host ""
-Write-Host "   git remote add origin https://github.com/YOUR_USERNAME/RedBanner-Extension.git" -ForegroundColor Yellow
+Write-Host "3. Run these commands:" -ForegroundColor White
+Write-Host "" 
+Write-Host "   git remote add origin https://github.com/BetaHydri/RedBanner-Extension.git" -ForegroundColor Yellow
 Write-Host "   git branch -M main" -ForegroundColor Yellow
 Write-Host "   git push -u origin main" -ForegroundColor Yellow
 Write-Host ""
