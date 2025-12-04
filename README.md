@@ -228,27 +228,27 @@ RedBanner-Extension/
 ### Banner Positions
 
 **Top Position (Default)**
-```
+<pre>
 ┌────────────────────────────────┐
 │  ● PRODUCTION - RED            │ ← Banner
 ├────────────────────────────────┤
 │  Website content               │
 │                                │
 └────────────────────────────────┘
-```
+</pre>
 
 **Bottom Position**
-```
+<pre>
 ┌────────────────────────────────┐
 │  Website content               │
 │                                │
 ├────────────────────────────────┤
 │  ● TESTING - BLUE              │ ← Banner
 └────────────────────────────────┘
-```
+</pre>
 
 **Left Side Position**
-```
+<pre>
 ┌──┬────────────────────────────┐
 │ D│                            │
 │ E│  Website content           │
@@ -256,10 +256,10 @@ RedBanner-Extension/
 │ ●│                            │
 └──┴────────────────────────────┘
   ↑ Banner
-```
+</pre>
 
 **Right Side Position**
-```
+<pre>
 ┌────────────────────────────┬──┐
 │                            │U │
 │  Website content           │A │
@@ -267,7 +267,7 @@ RedBanner-Extension/
 │                            │● │
 └────────────────────────────┴──┘
                                      ↑ Banner
-```
+</pre>
 
 ### Advanced Customization (Manual)
 
