@@ -1,14 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Internet Farm",
-  "version": "3.0.0",
-  "description": "Highly visible red banner for terminal server published Edge applications",
+  "version": "3.1.0",
+  "description": "Highly visible customizable banner for terminal server published Edge applications",
   "permissions": [
     "storage"
   ],
   "action": {
     "default_title": "Internet Farm"
   },
+  "options_page": "options.html",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
