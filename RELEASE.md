@@ -8,10 +8,23 @@ This guide explains the complete workflow for creating a new signed CRX package 
 
 ## Prerequisites
 
-- **Private Key (PEM file)**: `bin\RedBanner.pem` - Keep this secure and never distribute it
+- **Private Key (PEM file)**: `bin\RedBanner.pem` - Generate your own for your distribution (see below)
 - **Chrome/Edge**: Installed on your development machine
 - **PowerShell**: Version 5.1 or higher
 - **Administrator Access**: Required for testing enterprise deployment
+
+### Generating Your Own PEM File
+
+If you're forking this project or creating your own distribution:
+
+```powershell
+# Edge/Chrome will generate a new PEM file during first packaging
+# Just delete the existing one and run create-release.ps1
+Remove-Item bin\RedBanner.pem -ErrorAction SilentlyContinue
+.\scripts\create-release.ps1
+```
+
+**Note**: Each PEM file generates a unique Extension ID. If you create your own PEM, your extension will have a different ID than the original.
 
 ---
 
