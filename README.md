@@ -220,7 +220,13 @@ RedBanner-Extension/
 ├── TERMINAL-SERVER-SETUP.md      # Terminal Server configuration
 ├── MULTI-APP-CONFIGURATION.md    # Multi-app profile setup (NEW)
 └── README.md                     # This file
-```──────────────────────────────┐
+```
+
+### Banner Positions
+
+**Top Position (Default)**
+```
+┌────────────────────────────────┐
 │  ● PRODUCTION - RED           │ ← Banner
 ├────────────────────────────────┤
 │  Website content              │
