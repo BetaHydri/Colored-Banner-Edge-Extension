@@ -1,4 +1,5 @@
-# Launch Edge with RED branding (Internet Farm Extension)
+# Launch Edge with customizable banner (Internet Farm Extension)
+# Configure colors via: Right-click extension icon -> Options
 # This creates a dedicated profile that includes the extension
 
 param(

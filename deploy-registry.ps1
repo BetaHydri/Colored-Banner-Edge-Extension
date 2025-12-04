@@ -59,7 +59,8 @@ Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Cyan
 Write-Host "1. Users need to restart Microsoft Edge" -ForegroundColor White
 Write-Host "2. Extension will be automatically installed and enabled" -ForegroundColor White
-Write-Host "3. Red banner will appear on all websites" -ForegroundColor White
+Write-Host "3. Customizable banner will appear on all websites" -ForegroundColor White
+Write-Host "4. Right-click extension icon -> Options to configure colors and position" -ForegroundColor White
 Write-Host ""
 Write-Host "To verify installation:" -ForegroundColor Cyan
 Write-Host "- Open Edge and go to edge://extensions/" -ForegroundColor White

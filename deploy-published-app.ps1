@@ -30,7 +30,7 @@ if ($CreateShortcut) {
     $Shortcut = $WshShell.CreateShortcut($shortcutPath)
     $Shortcut.TargetPath = $batchPath
     $Shortcut.IconLocation = "$extensionPath\icons\icon128.png,0"
-    $Shortcut.Description = "Edge Browser with Red Branding"
+    $Shortcut.Description = "Edge Browser with Customizable Banner"
     $Shortcut.Save()
     
     Write-Host "✓ Created desktop shortcut: $shortcutPath" -ForegroundColor Green

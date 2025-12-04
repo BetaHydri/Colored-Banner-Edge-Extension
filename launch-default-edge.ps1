@@ -1,4 +1,4 @@
-# Launch default Edge WITHOUT red branding
+# Launch default Edge WITHOUT banner extension
 # This uses the default profile without the extension
 
 param(

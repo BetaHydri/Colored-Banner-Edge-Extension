@@ -62,7 +62,9 @@ Users can instantly identify which browser instance they're using based on the c
 
 4. **Click "Load unpacked"** and select the extension folder
 
-5. **Visit any website** - the red banner appears automatically!
+5. **Visit any website** - the banner appears automatically!
+
+6. **Customize the banner** - Right-click extension icon → Options to change colors, position, text, and more
 
 ## 📦 Installation Methods
 
@@ -105,7 +107,13 @@ Set-ItemProperty -Path $regPath -Name "1" -Value "\\server\share\RedBanner"
 
 ### Publishing Multiple Edge Apps with Different Banners
 
-**Scenario:** Publish two Edge apps - one with RED banner, one without.
+**Scenario:** Publish multiple Edge apps with different banner configurations.
+
+**Example:**
+- Production Edge (Red banner at top)
+- Testing Edge (Blue banner at bottom)
+- Development Edge (Green banner on left)
+- Standard Edge (No banner)
 
 #### Step 1: Deploy Extension Files
 
@@ -116,22 +124,38 @@ Set-ItemProperty -Path $regPath -Name "1" -Value "\\server\share\RedBanner"
 
 #### Step 2: Configure Published Apps
 
-**RED Edge App:**
-- **Name:** Internet Farm (Red)
+**Production Edge App (Red):**
+- **Name:** Production Browser
 - **Path:** `C:\ProgramData\EdgeExtensions\launch-red-edge.bat`
 - **Icon:** `C:\ProgramData\EdgeExtensions\InternetFarm\icons\icon128.png`
+- **Banner:** Red template, top position, "PRODUCTION" text
+
+**Testing Edge App (Blue):**
+- **Name:** Testing Browser
+- **Path:** `C:\ProgramData\EdgeExtensions\launch-blue-edge.bat`
+- **Icon:** `C:\ProgramData\EdgeExtensions\InternetFarm\icons\icon128.png`
+- **Banner:** Blue template, bottom position, "TESTING" text
 
 **Default Edge App:**
 - **Name:** Microsoft Edge
 - **Path:** `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
 - **Arguments:** `--profile-directory=Default`
+- **Banner:** None
 
-#### Step 3: Users See Two Apps
+#### Step 3: Configure Each Profile
 
-- **Click "Internet Farm (Red)"** → Edge opens with red banner
+1. Launch each app once
+2. Right-click extension icon → Options
+3. Configure color template, position, and text for each
+4. Settings are saved per-profile automatically
+
+#### Step 4: Users See Multiple Apps
+
+- **Click "Production Browser"** → Edge opens with red banner at top
+- **Click "Testing Browser"** → Edge opens with blue banner at bottom
 - **Click "Microsoft Edge"** → Edge opens without banner
 
-Each app uses a separate profile, so extensions don't interfere with each other.
+Each app uses a separate profile, so configurations are completely isolated.
 
 ## 🎨 Customization
 
@@ -181,7 +205,7 @@ RedBanner-Extension/
 │   └── icon128.png
 ├── deploy-registry.ps1           # Automated deployment script
 ├── deploy-published-app.ps1      # Terminal Server setup
-├── launch-red-edge.ps1           # Launch with extension
+├── launch-red-edge.ps1           # Launch with customizable banner
 ├── launch-default-edge.ps1       # Launch without extension
 ├── uninstall.ps1                 # Removal script
 ├── DEPLOYMENT.md                 # Enterprise deployment guide
@@ -247,8 +271,8 @@ RedBanner-Extension/
 │   └── icon128.png
 ├── deploy-registry.ps1       # Automated deployment script
 ├── deploy-published-app.ps1  # Terminal Server setup
-├── launch-red-edge.ps1       # Launch with extension
-├── launch-default-edge.ps1   # Launch without extension
+├── launch-red-edge.ps1           # Launch with customizable banner
+├── launch-default-edge.ps1       # Launch without extension
 ├── uninstall.ps1            # Removal script
 ├── DEPLOYMENT.md            # Enterprise deployment guide
 ├── TERMINAL-SERVER-SETUP.md # Terminal Server configuration
@@ -417,7 +441,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - 📚 Documentation: Added MULTI-APP-CONFIGURATION.md
 
 ### v3.0.0
-- Red banner overlay implementation
+- Banner overlay implementation (red default)
 - Automatic injection on all pages
 - Terminal Server deployment scripts
 - Enterprise deployment guides

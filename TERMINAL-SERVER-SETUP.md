@@ -1,8 +1,23 @@
 # Terminal Server Setup - Multiple Edge Apps
 
-## Scenario: Two Published Edge Apps
-1. **"Internet Farm (Red)"** - With red banner extension
-2. **"Microsoft Edge (Default)"** - Standard Edge without extension
+## Version 3.1.0 Features
+
+✨ **NEW:** Each published app can have completely different banner configurations:
+- Different colors (10 templates + custom)
+- Different positions (top, bottom, left, right)
+- Different text and logos
+- Show/hide individually
+- All configured via easy-to-use Options UI
+
+## Scenario: Multiple Published Edge Apps with Different Banners
+
+Examples:
+1. **"Production (Red)"** - Red banner at top, "PRODUCTION" text
+2. **"Testing (Blue)"** - Blue banner at bottom, "TESTING" text  
+3. **"Development (Green)"** - Green banner on left side, "DEV" text
+4. **"Microsoft Edge (Default)"** - Standard Edge without extension
+
+**Key Concept:** Each app uses a different `--profile-directory`, and settings are automatically isolated per profile.
 
 ---
 
@@ -17,15 +32,33 @@
 ```
 This copies extension to: `C:\ProgramData\EdgeExtensions\InternetFarm\`
 
-#### 2. Create RED Edge Launcher
+#### 2. Create Launcher Scripts for Each App
+
+**RED Production Launcher:**
 ```batch
 @echo off
-REM Launches Edge with RED branding using dedicated profile
+REM Launches Edge with RED banner (Production)
 start msedge.exe --profile-directory="InternetFarm-Red" --load-extension="C:\ProgramData\EdgeExtensions\InternetFarm" --no-first-run https://yourapp.com
 ```
 Save as: `C:\ProgramData\EdgeExtensions\launch-red-edge.bat`
 
-#### 3. Create DEFAULT Edge Launcher
+**BLUE Testing Launcher:**
+```batch
+@echo off
+REM Launches Edge with BLUE banner (Testing)
+start msedge.exe --profile-directory="InternetFarm-Blue" --load-extension="C:\ProgramData\EdgeExtensions\InternetFarm" --no-first-run https://yourapp.com
+```
+Save as: `C:\ProgramData\EdgeExtensions\launch-blue-edge.bat`
+
+**GREEN Development Launcher:**
+```batch
+@echo off
+REM Launches Edge with GREEN banner (Development)
+start msedge.exe --profile-directory="InternetFarm-Green" --load-extension="C:\ProgramData\EdgeExtensions\InternetFarm" --no-first-run https://yourapp.com
+```
+Save as: `C:\ProgramData\EdgeExtensions\launch-green-edge.bat`
+
+**DEFAULT Edge Launcher (No Extension):**
 ```batch
 @echo off
 REM Launches Edge WITHOUT extension using default profile
@@ -33,17 +66,67 @@ start msedge.exe --profile-directory="Default" --no-first-run https://yourapp.co
 ```
 Save as: `C:\ProgramData\EdgeExtensions\launch-default-edge.bat`
 
-#### 4. Publish Both Apps in RemoteApp
+#### 3. Configure Each Profile's Banner
 
-**RED Edge App:**
-- Name: `Internet Farm (Red)`
+**IMPORTANT:** Run this setup once to configure each profile:
+
+1. Launch Red Edge manually:
+   ```powershell
+   C:\ProgramData\EdgeExtensions\launch-red-edge.bat
+   ```
+   - Right-click extension icon → **Options**
+   - Select **"Red Alert"** template
+   - Set text: **"PRODUCTION"**
+   - Choose position: **Top**
+   - Save settings
+
+2. Launch Blue Edge manually:
+   ```powershell
+   C:\ProgramData\EdgeExtensions\launch-blue-edge.bat
+   ```
+   - Right-click extension icon → **Options**
+   - Select **"Blue Info"** template
+   - Set text: **"TESTING"**
+   - Choose position: **Bottom**
+   - Save settings
+
+3. Launch Green Edge manually:
+   ```powershell
+   C:\ProgramData\EdgeExtensions\launch-green-edge.bat
+   ```
+   - Right-click extension icon → **Options**
+   - Select **"Green Safe"** template
+   - Set text: **"DEVELOPMENT"**
+   - Choose position: **Left Side**
+   - Save settings
+
+**Settings persist automatically!** Each profile maintains its own configuration.
+
+#### 4. Publish Apps in RemoteApp
+
+**Production Edge (Red):**
+- Name: `Production Browser (Red)`
 - Path: `C:\ProgramData\EdgeExtensions\launch-red-edge.bat`
 - Icon: `C:\ProgramData\EdgeExtensions\InternetFarm\icons\icon128.png`
+- User Assignment: Production users
 
-**Default Edge App:**
+**Testing Edge (Blue):**
+- Name: `Testing Browser (Blue)`
+- Path: `C:\ProgramData\EdgeExtensions\launch-blue-edge.bat`
+- Icon: `C:\ProgramData\EdgeExtensions\InternetFarm\icons\icon128.png`
+- User Assignment: QA/Test users
+
+**Development Edge (Green):**
+- Name: `Development Browser (Green)`
+- Path: `C:\ProgramData\EdgeExtensions\launch-green-edge.bat`
+- Icon: `C:\ProgramData\EdgeExtensions\InternetFarm\icons\icon128.png`
+- User Assignment: Developers
+
+**Default Edge (No Extension):**
 - Name: `Microsoft Edge`
 - Path: `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
 - Arguments: `--profile-directory=Default`
+- User Assignment: All users
 
 ---
 
@@ -92,17 +175,34 @@ Run the automated deployment:
 
 ## Testing
 
-### Launch RED Edge:
+### Launch Production (Red) Edge:
 ```powershell
-.\launch-red-edge.ps1 -Url "https://google.com"
+C:\ProgramData\EdgeExtensions\launch-red-edge.bat
 ```
-✓ Should show red banner at top
+✓ Should show **red banner at top** with "PRODUCTION"
 
-### Launch DEFAULT Edge:
+### Launch Testing (Blue) Edge:
 ```powershell
-.\launch-default-edge.ps1 -Url "https://google.com"
+C:\ProgramData\EdgeExtensions\launch-blue-edge.bat
 ```
-✓ Should NOT show red banner
+✓ Should show **blue banner at bottom** with "TESTING"
+
+### Launch Development (Green) Edge:
+```powershell
+C:\ProgramData\EdgeExtensions\launch-green-edge.bat
+```
+✓ Should show **green banner on left side** with "DEVELOPMENT"
+
+### Launch Default Edge:
+```powershell
+C:\ProgramData\EdgeExtensions\launch-default-edge.bat
+```
+✓ Should **NOT show any banner**
+
+### Verify Configuration Isolation:
+1. Open Red Edge → Configure via Options → Change to Yellow
+2. Open Blue Edge → Should still be Blue (not affected)
+3. Each profile maintains its own settings ✓
 
 ---
 
@@ -110,33 +210,49 @@ Run the automated deployment:
 
 ### RemoteApp Manager Settings:
 
-| Setting | RED Edge | Default Edge |
-|---------|----------|--------------|
-| **Display Name** | Internet Farm (Red) | Microsoft Edge |
-| **Path** | `C:\ProgramData\EdgeExtensions\launch-red-edge.bat` | `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe` |
-| **Arguments** | *(in batch file)* | `--profile-directory=Default` |
-| **Icon** | `C:\ProgramData\EdgeExtensions\InternetFarm\icons\icon128.png` | Default Edge icon |
-| **User Assignment** | Production Users | All Users |
+| Setting | Production (Red) | Testing (Blue) | Development (Green) | Default Edge |
+|---------|------------------|----------------|---------------------|-------------|
+| **Display Name** | Production Browser (Red) | Testing Browser (Blue) | Development Browser (Green) | Microsoft Edge |
+| **Path** | `launch-red-edge.bat` | `launch-blue-edge.bat` | `launch-green-edge.bat` | `msedge.exe` |
+| **Profile** | InternetFarm-Red | InternetFarm-Blue | InternetFarm-Green | Default |
+| **Banner Color** | Red (#ff0000) | Blue (#0066ff) | Green (#00cc00) | None |
+| **Banner Position** | Top | Bottom | Left Side | N/A |
+| **Banner Text** | PRODUCTION | TESTING | DEVELOPMENT | N/A |
+| **Icon** | icon128.png | icon128.png | icon128.png | Default |
+| **User Assignment** | Production Users | QA/Testers | Developers | All Users |
 
 ---
 
 ## Key Points
 
-✅ **Different profiles = Different extensions**
-- Profile "InternetFarm-Red" → Has extension
+✓ **Different profiles = Different configurations**
+- Profile "InternetFarm-Red" → Red banner (top)
+- Profile "InternetFarm-Blue" → Blue banner (bottom)
+- Profile "InternetFarm-Green" → Green banner (left)
 - Profile "Default" → No extension
 
-✅ **Users see two separate apps** in RemoteApp
-- Click "Internet Farm (Red)" → Red banner appears
+✓ **Users see multiple apps** in RemoteApp
+- Click "Production Browser (Red)" → Red banner at top
+- Click "Testing Browser (Blue)" → Blue banner at bottom
+- Click "Development Browser (Green)" → Green banner on left
 - Click "Microsoft Edge" → Standard Edge
 
-✅ **No interference** between apps
-- Extensions are profile-specific
-- Settings don't overlap
+✓ **Complete configuration isolation** (NEW in v3.1.0)
+- Each profile stores its own settings
+- Colors, positions, text, logos all independent
+- Visibility toggle per profile
+- No interference between apps
 
-✅ **Easy management**
+✓ **Easy customization**
+- Right-click extension → Options → Configure
+- 10 color templates available
+- Custom colors and logos supported
+- Changes take effect immediately
+
+✓ **Centralized management**
 - Update extension files in `C:\ProgramData\EdgeExtensions\InternetFarm\`
-- All RED Edge instances auto-update
+- All profiles use same extension code
+- Only settings differ per profile
 
 ---
 

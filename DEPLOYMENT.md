@@ -1,5 +1,26 @@
 # Enterprise Deployment Guide - Internet Farm Extension
 
+## Overview
+
+**Version 3.1.0** includes advanced customization features:
+- ✨ 10 pre-built color templates
+- ✨ Configuration UI (options page)
+- ✨ Multiple banner positions (top, bottom, left, right)
+- ✨ Visibility toggle
+- ✨ Custom logo support
+- ✨ Custom text and colors
+- ✨ Profile-isolated storage for multi-app scenarios
+
+### Initial Configuration
+
+After deployment, users (or administrators) can configure the banner:
+1. Right-click extension icon → **Options**
+2. Choose color template and position
+3. Customize text and upload logo (optional)
+4. Save settings (automatically per-profile)
+
+---
+
 ## Option 1: Group Policy Deployment (Recommended for Enterprise)
 
 ### Step 1: Prepare the Extension
@@ -82,6 +103,51 @@ Edge doesn't easily support custom CRX signing anymore. Microsoft recommends:
    ```
 
 3. **Deploy via login script or SCCM**
+
+---
+
+## Pre-Configuration for Different Environments
+
+### Scenario: Deploy Different Settings Per Published App
+
+For Terminal Server with multiple published Edge apps (Production/Testing/Dev), each app should use a different profile with pre-configured settings.
+
+**See:** `MULTI-APP-CONFIGURATION.md` for complete setup guide.
+
+### Quick Pre-Configuration Steps:
+
+1. **Launch each profile manually once:**
+   ```powershell
+   # Production (Red)
+   msedge.exe --profile-directory="InternetFarm-Red" --load-extension="C:\ProgramData\EdgeExtensions\InternetFarm"
+   
+   # Testing (Blue)
+   msedge.exe --profile-directory="InternetFarm-Blue" --load-extension="C:\ProgramData\EdgeExtensions\InternetFarm"
+   
+   # Development (Green)
+   msedge.exe --profile-directory="InternetFarm-Green" --load-extension="C:\ProgramData\EdgeExtensions\InternetFarm"
+   ```
+
+2. **Configure each profile via Options page:**
+   - Red Profile: Red Alert template, "PRODUCTION"
+   - Blue Profile: Blue Info template, "TESTING"
+   - Green Profile: Green Safe template, "DEVELOPMENT"
+
+3. **Settings are stored per-profile automatically**
+   - Located in: `%LOCALAPPDATA%\Microsoft\Edge\User Data\[ProfileName]\`
+   - Persists across sessions
+   - Isolated between profiles
+
+### Available Customization Options:
+
+| Feature | Options |
+|---------|--------|
+| **Color Templates** | Red Alert, Orange Warning, Yellow Caution, Green Safe, Blue Info, Purple Production, Pink Test, Teal Dev, Navy Corporate, Gray Neutral |
+| **Banner Position** | Top, Bottom, Left Side, Right Side |
+| **Custom Text** | Any text (e.g., "PRODUCTION", "TEST", "DEV") |
+| **Logo** | Upload PNG/JPG/SVG (max 100KB) |
+| **Visibility** | Show/Hide toggle |
+| **Custom Colors** | Full color picker for unlimited combinations |
 
 ---
 

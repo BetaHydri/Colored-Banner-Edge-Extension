@@ -49,7 +49,7 @@ Write-Host "Creating initial commit..." -ForegroundColor Yellow
 git commit -m "Initial commit - RedBanner Extension v3.0.0
 
 Features:
-- Red banner overlay on all webpages
+- Customizable banner overlay on all webpages (10 color templates + custom colors)
 - Terminal Server deployment scripts
 - Enterprise Group Policy support
 - Multiple profile configuration
