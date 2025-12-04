@@ -1,4 +1,4 @@
-# RedBanner Extension for Microsoft Edge
+# Colored Banner Extension for Microsoft Edge
 
 A highly customizable Microsoft Edge extension that displays a visible banner on every webpage. Perfect for Terminal Server environments where you need to visually distinguish between different published Edge applications with full configuration options.
 
