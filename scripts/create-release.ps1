@@ -37,7 +37,7 @@ param(
 
 # Script configuration
 $ErrorActionPreference = "Stop"
-$extensionDir = $PSScriptRoot
+$extensionDir = Split-Path $PSScriptRoot -Parent
 $manifestPath = Join-Path $extensionDir "manifest.json"
 $pemPath = Join-Path $extensionDir "bin\RedBanner.pem"
 

@@ -1,5 +1,6 @@
 # Extract public key from PEM file for Chrome/Edge extension manifest
-$pemPath = ".\bin\RedBanner.pem"
+$scriptDir = Split-Path $PSScriptRoot -Parent
+$pemPath = Join-Path $scriptDir "bin\RedBanner.pem"
 
 # Read PEM content
 $pemContent = Get-Content $pemPath -Raw

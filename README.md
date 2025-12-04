@@ -84,15 +84,17 @@ Users can instantly identify which browser instance they're using based on the c
 4. Click "Load unpacked"
 5. Select the folder
 
-### Method 2: Registry Deployment (Enterprise)
+### Method 2: Group Policy Deployment (Domain-Joined Terminal Servers)
 
-**Run as Administrator:**
+**For domain-joined terminal servers only:**
 
+1. Create signed CRX package:
 ```powershell
-.\deploy-registry.ps1
-```
+.\scripts\create-release.ps1
+```2. Deploy to network share and configure Group Policy
+   - See **DEPLOYMENT.md** for complete setup instructions
 
-This copies the extension to `C:\ProgramData\EdgeExtensions\InternetFarm\` and configures registry for automatic installation.
+**Note:** Registry deployment does NOT work on unmanaged (non-domain) PCs.
 
 ### Method 3: Group Policy Deployment
 
@@ -102,13 +104,16 @@ This copies the extension to `C:\ProgramData\EdgeExtensions\InternetFarm\` and c
 4. Configure: **"Configure the list of force-installed extensions"**
 5. Add the extension path
 
-### Method 4: File Share Deployment
+### Method 4: Signed CRX Package
 
-Deploy from network share without local copy:
+Create a properly signed CRX for distribution:
 
 ```powershell
-$regPath = "HKLM:\Software\Policies\Microsoft\Edge\ExtensionInstallForcelist"
-Set-ItemProperty -Path $regPath -Name "1" -Value "\\server\share\RedBanner"
+# Create signed package
+.\create-release.ps1
+
+# Output: bin\RedBanner.crx
+# Deploy this file via Group Policy (see DEPLOYMENT.md)
 ```
 
 ## 🖥️ Terminal Server Setup
@@ -127,7 +132,9 @@ Set-ItemProperty -Path $regPath -Name "1" -Value "\\server\share\RedBanner"
 
 ```powershell
 # Run as Administrator
-.\deploy-published-app.ps1 -AppName "Internet Farm (Red)" -CreateShortcut
+```powershell
+.\scripts\deploy-published-app.ps1 -AppName "Internet Farm (Red)" -CreateShortcut
+```
 ```
 
 #### Step 2: Configure Published Apps
@@ -200,26 +207,39 @@ Each app uses a separate profile, so configurations are completely isolated.
 
 ```
 RedBanner-Extension/
-├── manifest.json                  # Extension configuration
+├── manifest.json                  # Extension configuration (with public key)
 ├── content.js                     # Dynamic banner injection script
 ├── background.js                  # Background service worker & settings init
 ├── options.html                   # Configuration UI (NEW in v3.1.0)
 ├── options.js                     # Options page logic (NEW in v3.1.0)
-├── sidepanel.html                # Side panel UI (optional)
-├── icons/                        # Extension icons
+├── sidepanel.html                 # Side panel UI (optional)
+├── bin/                           # Build outputs (git ignored)
+│   ├── RedBanner.crx              # Signed extension package
+│   └── RedBanner.pem              # Private key (NEVER distribute)
+├── icons/                         # Extension icons
 │   ├── icon16.png
 │   ├── icon32.png
 │   ├── icon48.png
 │   └── icon128.png
-├── deploy-registry.ps1           # Automated deployment script
-├── deploy-published-app.ps1      # Terminal Server setup
-├── launch-red-edge.ps1           # Launch with customizable banner
-├── launch-default-edge.ps1       # Launch without extension
-├── uninstall.ps1                 # Removal script
-├── DEPLOYMENT.md                 # Enterprise deployment guide
-├── TERMINAL-SERVER-SETUP.md      # Terminal Server configuration
-├── MULTI-APP-CONFIGURATION.md    # Multi-app profile setup (NEW)
-└── README.md                     # This file
+├── doc/                           # Screenshots
+│   ├── Banner.png
+│   ├── BannerConfig1.png
+│   └── BannerConfig2.png
+├── scripts/                       # PowerShell automation scripts
+│   ├── create-release.ps1         # Create signed CRX package
+│   ├── extract-public-key.ps1     # Extract public key from PEM
+│   ├── deploy-registry.ps1        # Deployment script (domain only)
+│   ├── deploy-published-app.ps1   # Terminal Server setup
+│   ├── launch-red-edge.ps1        # Launch with Red profile
+│   ├── launch-default-edge.ps1    # Launch without extension
+│   ├── uninstall.ps1              # Removal script
+│   ├── publish-to-github.ps1      # GitHub publishing
+│   └── update-remote-url.ps1      # Git remote helper
+├── DEPLOYMENT.md                  # Enterprise deployment guide
+├── RELEASE.md                     # Release creation guide (NEW)
+├── TERMINAL-SERVER-SETUP.md       # Terminal Server configuration
+├── MULTI-APP-CONFIGURATION.md     # Multi-app profile setup
+└── README.md                      # This file
 ```
 
 ### Banner Positions
@@ -289,13 +309,16 @@ Colored-Banner-Edge-Extension/
 │   ├── Banner.png                 # Banner screenshot
 │   ├── BannerConfig1.png          # Config UI screenshot (templates)
 │   └── BannerConfig2.png          # Config UI screenshot (full options)
-├── deploy-registry.ps1            # Automated deployment script
-├── deploy-published-app.ps1       # Terminal Server setup
-├── launch-red-edge.ps1            # Launch with customizable banner
-├── launch-default-edge.ps1        # Launch without extension
-├── uninstall.ps1                  # Removal script
-├── update-remote-url.ps1          # Update git remote helper
-├── publish-to-github.ps1          # GitHub publishing script
+├── scripts/                       # PowerShell automation scripts
+│   ├── create-release.ps1         # Create signed CRX package
+│   ├── extract-public-key.ps1     # Extract public key from PEM
+│   ├── deploy-registry.ps1        # Automated deployment script
+│   ├── deploy-published-app.ps1   # Terminal Server setup
+│   ├── launch-red-edge.ps1        # Launch with customizable banner
+│   ├── launch-default-edge.ps1    # Launch without extension
+│   ├── uninstall.ps1              # Removal script
+│   ├── update-remote-url.ps1      # Update git remote helper
+│   └── publish-to-github.ps1      # GitHub publishing script
 ├── DEPLOYMENT.md                  # Enterprise deployment guide
 ├── TERMINAL-SERVER-SETUP.md       # Terminal Server configuration
 ├── MULTI-APP-CONFIGURATION.md     # Multi-app profile setup guide
@@ -310,45 +333,70 @@ Colored-Banner-Edge-Extension/
   "name": "Internet Farm",
   "version": "3.1.0",
   "description": "Highly customizable banner for terminal server published Edge applications",
+  "key": "MIIBIjANBg...",  // Public key for consistent Extension ID
   "permissions": ["storage"],
   "options_page": "options.html",
   "content_scripts": [{
     "matches": ["<all_urls>"],
     "js": ["content.js"],
     "run_at": "document_start"
-  }]
+  }],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Internet Farm"
+  }
 }
 ```
 
 ### content.js
 
 Dynamically injects a customizable banner with features:
-- Multiple color schemes (from user settings)
+- Multiple color schemes (from user-configurable settings)
 - Multiple positions (top, bottom, left, right)
 - Custom text and logo support
 - Visibility toggle
 - Auto-adjusts body margin to prevent content overlap
-- Real-time settings updates
+- Real-time settings updates via chrome.storage.onChanged
+- Blinking green status indicator
 
 ### options.html & options.js
 
 Provides a user-friendly configuration interface:
 - 10 pre-built color templates
-- Custom color picker
-- Position selector (4 positions)
+- Custom color picker for unlimited combinations
+- Position selector (4 positions: top, bottom, left, right)
 - Banner text customization
-- Logo upload and preview
+- Logo upload and preview (PNG, JPG, SVG up to 100KB)
 - Visibility toggle
 - Live preview panel
 - Save/reset functionality
-- Blinking green indicator
-- Custom text
-- Auto-adjusts body margin to prevent content overlap
+- Settings stored in chrome.storage.local (per-profile)
 
-## 🛠️ Deployment Scripts
+## 🛠️ PowerShell Scripts
+
+### create-release.ps1 ⭐ NEW
+- Creates signed CRX package from source code
+- Validates manifest and PEM file
+- Creates clean build (excludes dev files)
+- Output: `bin\RedBanner.crx`
+- **Use this for every release**
+
+### extract-public-key.ps1 ⭐ NEW
+- Extracts public key from PEM file
+- Adds to manifest.json for consistent Extension ID
+- Verifies key matches PEM file
 
 ### deploy-registry.ps1
-- Copies extension to `C:\ProgramData\EdgeExtensions\InternetFarm\`
+- ⚠️ **Works only on domain-joined servers**
+- Copies extension to system location
 - Configures registry for force installation
 - Requires Administrator privileges
 
@@ -357,16 +405,12 @@ Provides a user-friendly configuration interface:
 - Generates desktop shortcuts
 - Configures RemoteApp settings
 
-### launch-red-edge.ps1
-- Launches Edge with RED banner using dedicated profile
-- Useful for testing and RemoteApp publishing
-
-### launch-default-edge.ps1
-- Launches Edge WITHOUT banner using default profile
-- Standard Edge experience
+### launch-red-edge.ps1 / launch-default-edge.ps1
+- Launch Edge with specific profiles
+- Useful for testing multi-app setups
 
 ### uninstall.ps1
-- Removes registry entries
+- Removes registry policies
 - Deletes local extension files
 - Clean uninstallation
 
@@ -374,7 +418,11 @@ Provides a user-friendly configuration interface:
 
 - Microsoft Edge (Chromium-based) version 88 or later
 - Windows 10/11 or Windows Server 2016+
-- For enterprise deployment: Administrator privileges
+- For manual installation: Developer mode enabled
+- For enterprise deployment: 
+  - **Domain-joined machines** (Group Policy deployment)
+  - Administrator privileges
+  - Network file share for CRX distribution
 
 ## 🔒 Security
 
@@ -413,10 +461,20 @@ Provides a user-friendly configuration interface:
 4. Check if storage quota is exceeded (unlikely with small settings)
 ### Extension not auto-installing (Enterprise)
 
-1. Verify file permissions (users need READ access)
-2. Check Group Policy applied: `gpresult /r`
-3. View applied policies: `edge://policy/`
-4. Ensure registry path correct: `HKLM\Software\Policies\Microsoft\Edge\ExtensionInstallForcelist`
+⚠️ **First, verify server is domain-joined:**
+```powershell
+(Get-WmiObject Win32_ComputerSystem).PartOfDomain  # Should return True
+```
+
+**If domain-joined:**
+1. Check Group Policy applied: `gpresult /r`
+2. View applied policies in Edge: `edge://policy/`
+3. Verify network share permissions (READ access)
+4. Check Extension ID is correct
+
+**If NOT domain-joined:**
+- Registry/Policy deployment won't work
+- Use manual installation with Developer mode
 
 ### Extension appears in wrong Edge instance
 
