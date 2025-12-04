@@ -273,41 +273,8 @@ RedBanner-Extension/
 
 If you prefer to edit code directly, you can modify `content.js` for programmatic customization. However, the Options UI is recommended for most users.
 
-## 📁 File Structure
+## 📄 Code Documentation
 
-```
-Colored-Banner-Edge-Extension/
-├── manifest.json                  # Extension configuration
-├── content.js                     # Dynamic banner injection script
-├── background.js                  # Background service worker & settings init
-├── options.html                   # Configuration UI
-├── options.js                     # Options page logic
-├── sidepanel.html                 # Side panel UI (optional)
-├── icons/                         # Extension icons
-│   ├── icon16.png
-│   ├── icon32.png
-│   ├── icon48.png
-│   └── icon128.png
-├── doc/                           # Documentation & screenshots
-│   ├── Banner.png                 # Banner screenshot
-│   ├── BannerConfig1.png          # Config UI screenshot (templates)
-│   └── BannerConfig2.png          # Config UI screenshot (full options)
-├── scripts/                       # PowerShell automation scripts
-│   ├── create-release.ps1         # Create signed CRX package
-│   ├── extract-public-key.ps1     # Extract public key from PEM
-│   ├── deploy-registry.ps1        # Automated deployment script
-│   ├── deploy-published-app.ps1   # Terminal Server setup
-│   ├── launch-red-edge.ps1        # Launch with customizable banner
-│   ├── launch-default-edge.ps1    # Launch without extension
-│   ├── uninstall.ps1              # Removal script
-│   ├── update-remote-url.ps1      # Update git remote helper
-│   └── publish-to-github.ps1      # GitHub publishing script
-├── DEPLOYMENT.md                  # Enterprise deployment guide
-├── TERMINAL-SERVER-SETUP.md       # Terminal Server configuration
-├── MULTI-APP-CONFIGURATION.md     # Multi-app profile setup guide
-├── LICENSE                        # MIT License
-└── README.md                      # This file
-```
 ### manifest.json
 
 ```json
