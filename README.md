@@ -216,7 +216,6 @@ RedBanner-Extension/
 |   |-- launch-red-edge.ps1        # Launch with Red profile
 |   |-- launch-default-edge.ps1    # Launch without extension
 |   |-- uninstall.ps1              # Removal script
-|   |-- publish-to-github.ps1      # GitHub publishing
 |   `-- update-remote-url.ps1      # Git remote helper
 |-- DEPLOYMENT.md                  # Enterprise deployment guide
 |-- RELEASE.md                     # Release creation guide (NEW)
@@ -365,6 +364,10 @@ Provides a user-friendly configuration interface:
 - Removes registry policies
 - Deletes local extension files
 - Clean uninstallation
+
+### update-remote-url.ps1
+- Updates git remote URLs
+- Useful for repository maintenance
 
 ## 📋 Requirements
 
