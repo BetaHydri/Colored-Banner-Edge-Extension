@@ -217,10 +217,10 @@ RedBanner-Extension/
 |   |-- launch-default-edge.ps1    # Launch without extension
 |   |-- uninstall.ps1              # Removal script
 |   `-- update-remote-url.ps1      # Git remote helper
-|-- [DEPLOYMENT.md](DEPLOYMENT.md)                  # Enterprise deployment guide
-|-- [RELEASE.md](RELEASE.md)                     # Release creation guide (NEW)
-|-- [TERMINAL-SERVER-SETUP.md](TERMINAL-SERVER-SETUP.md)       # Terminal Server configuration
-|-- [MULTI-APP-CONFIGURATION.md](MULTI-APP-CONFIGURATION.md)     # Multi-app profile setup
+|-- DEPLOYMENT.md                  # Enterprise deployment guide
+|-- RELEASE.md                     # Release creation guide (NEW)
+|-- TERMINAL-SERVER-SETUP.md       # Terminal Server configuration
+|-- MULTI-APP-CONFIGURATION.md     # Multi-app profile setup
 `-- README.md                      # This file
 </pre>
 
