@@ -188,7 +188,7 @@ Each app uses a separate profile, so configurations are completely isolated.
 
 ## 📁 File Structure
 
-```
+<pre>
 RedBanner-Extension/
 |-- manifest.json                  # Extension configuration (with public key)
 |-- content.js                     # Dynamic banner injection script
@@ -223,7 +223,7 @@ RedBanner-Extension/
 |-- TERMINAL-SERVER-SETUP.md       # Terminal Server configuration
 |-- MULTI-APP-CONFIGURATION.md     # Multi-app profile setup
 `-- README.md                      # This file
-```
+</pre>
 
 ### Banner Positions
 
