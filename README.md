@@ -89,32 +89,14 @@ Users can instantly identify which browser instance they're using based on the c
 **For domain-joined terminal servers only:**
 
 1. Create signed CRX package:
-```powershell
-.\scripts\create-release.ps1
-```2. Deploy to network share and configure Group Policy
+   ```powershell
+   .\scripts\create-release.ps1
+   ```
+
+2. Deploy to network share and configure Group Policy
    - See **DEPLOYMENT.md** for complete setup instructions
 
 **Note:** Registry deployment does NOT work on unmanaged (non-domain) PCs.
-
-### Method 3: Group Policy Deployment
-
-1. Copy extension to network share: `\\server\share\EdgeExtensions\RedBanner\`
-2. Open Group Policy Management Console
-3. Navigate to: **Computer Configuration → Administrative Templates → Microsoft Edge → Extensions**
-4. Configure: **"Configure the list of force-installed extensions"**
-5. Add the extension path
-
-### Method 4: Signed CRX Package
-
-Create a properly signed CRX for distribution:
-
-```powershell
-# Create signed package
-.\create-release.ps1
-
-# Output: bin\RedBanner.crx
-# Deploy this file via Group Policy (see DEPLOYMENT.md)
-```
 
 ## 🖥️ Terminal Server Setup
 
