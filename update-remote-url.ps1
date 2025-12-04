@@ -3,7 +3,7 @@
 Write-Host "Updating Git remote URL to RedBanner-Extension..." -ForegroundColor Yellow
 
 # Update the remote URL
-git remote set-url origin https://github.com/BetaHydri/RedBanner-Extension.git
+git remote set-url origin https://github.com/BetaHydri/Red-Banner-Edge-Extension.git
 
 # Verify the change
 Write-Host ""
