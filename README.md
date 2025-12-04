@@ -1,4 +1,4 @@
-﻿# Colored Banner Extension for Microsoft Edge
+# Colored Banner Extension for Microsoft Edge
 
 A highly customizable Microsoft Edge extension that displays a visible banner on every webpage. Perfect for Terminal Server environments where you need to visually distinguish between different published Edge applications with full configuration options.
 
@@ -94,7 +94,7 @@ Users can instantly identify which browser instance they're using based on the c
    ```
 
 2. Deploy to network share and configure Group Policy
-   - See **DEPLOYMENT.md** for complete setup instructions
+   - See **[DEPLOYMENT.md](DEPLOYMENT.md)** for complete setup instructions
 
 **Note:** Registry deployment does NOT work on unmanaged (non-domain) PCs.
 
@@ -217,10 +217,10 @@ RedBanner-Extension/
 |   |-- launch-default-edge.ps1    # Launch without extension
 |   |-- uninstall.ps1              # Removal script
 |   `-- update-remote-url.ps1      # Git remote helper
-|-- DEPLOYMENT.md                  # Enterprise deployment guide
-|-- RELEASE.md                     # Release creation guide (NEW)
-|-- TERMINAL-SERVER-SETUP.md       # Terminal Server configuration
-|-- MULTI-APP-CONFIGURATION.md     # Multi-app profile setup
+|-- [DEPLOYMENT.md](DEPLOYMENT.md)                  # Enterprise deployment guide
+|-- [RELEASE.md](RELEASE.md)                     # Release creation guide (NEW)
+|-- [TERMINAL-SERVER-SETUP.md](TERMINAL-SERVER-SETUP.md)       # Terminal Server configuration
+|-- [MULTI-APP-CONFIGURATION.md](MULTI-APP-CONFIGURATION.md)     # Multi-app profile setup
 `-- README.md                      # This file
 </pre>
 
@@ -390,7 +390,7 @@ Provides a user-friendly configuration interface:
 1. Verify using different profiles (`--profile-directory` parameter)
 2. Check registry deployment targets correct profile
 3. Use separate batch launchers for each app
-4. **See MULTI-APP-CONFIGURATION.md for detailed multi-app setup**
+4. **See [MULTI-APP-CONFIGURATION.md](MULTI-APP-CONFIGURATION.md) for detailed multi-app setup**
 
 ### Different published apps share the same banner settings
 
@@ -400,7 +400,7 @@ Provides a user-friendly configuration interface:
 1. Ensure each published app uses a different `--profile-directory`
 2. Example: `--profile-directory="InternetFarm-Red"` vs `--profile-directory="InternetFarm-Blue"`
 3. Configure each profile separately via the Options page
-4. Refer to **MULTI-APP-CONFIGURATION.md** for complete setup guide
+4. Refer to **[MULTI-APP-CONFIGURATION.md](MULTI-APP-CONFIGURATION.md)** for complete setup guide
 
 ### Banner overlaps with website header
 
@@ -475,7 +475,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - ✨ **NEW:** Custom text and color picker
 - ✨ **NEW:** Live preview functionality
 - 🔧 Improved: Profile-isolated storage for multi-app scenarios
-- 📚 Documentation: Added MULTI-APP-CONFIGURATION.md
+- 📚 Documentation: Added [MULTI-APP-CONFIGURATION.md](MULTI-APP-CONFIGURATION.md)
 
 ### v3.0.0
 - Banner overlay implementation (red default)
