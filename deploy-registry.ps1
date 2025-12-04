@@ -25,9 +25,10 @@ if (!(Test-Path $LocalPath)) {
 # Copy extension files
 Write-Host "Copying extension files..." -ForegroundColor Yellow
 try {
-    Copy-Item "$PSScriptRoot\*" -Destination $LocalPath -Recurse -Force -Exclude "*.ps1","*.md","*.zip"
+    Copy-Item "$PSScriptRoot\*" -Destination $LocalPath -Recurse -Force -Exclude "*.ps1", "*.md", "*.zip"
     Write-Host "✓ Files copied successfully" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "ERROR: Failed to copy files: $_" -ForegroundColor Red
     exit 1
 }
@@ -46,7 +47,8 @@ try {
     # Format: index = "path_to_extension"
     Set-ItemProperty -Path $regPath -Name "1" -Value $LocalPath -Type String
     Write-Host "✓ Registry configured successfully" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "ERROR: Failed to configure registry: $_" -ForegroundColor Red
     exit 1
 }
