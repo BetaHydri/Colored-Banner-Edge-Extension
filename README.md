@@ -35,17 +35,22 @@ Users can instantly identify which browser instance they're using based on the c
 - ✨ **Custom Colors** - Use color picker for unlimited color combinations
 - ✨ **Live Preview** - See changes before saving
 
-## 📸 Screenshot
+## 📸 Screenshots
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  ● 🔴 RED BROWSER - PRODUCTION APP                          │ ← Colored Banner
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  Your Website Content Here                                  │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+### Banner in Action
+![Customizable Banner](doc/Banner.png)
+
+*Banner displayed at the top of a webpage with custom colors and text*
+
+### Configuration UI - Color Templates
+![Banner Configuration - Templates](doc/BannerConfig1.png)
+
+*Choose from 10 pre-built color templates or create your own*
+
+### Configuration UI - All Options
+![Banner Configuration - Full Options](doc/BannerConfig2.png)
+
+*Complete configuration interface with position, text, logo, and visibility controls*
 
 ## 🚀 Quick Start
 
