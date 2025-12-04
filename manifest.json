@@ -3,6 +3,7 @@
   "name": "Internet Farm",
   "version": "3.1.0",
   "description": "Highly visible customizable banner for terminal server published Edge applications",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAprh+O2Wd7MysHnXlqLNEyAB2o8W9zA5kqmKNkYi0NlTcIZkinkNouMZMo0FcY449kS9M4LnMyQs/ELdD9Zy4iOVuzc8aRbQT/u44C5ROW/RAwLZDwvEEgRwxGyaSzq4Ca/l2oyyYKCxFNyeYVgfP1fY0uq4sXS2me5scQ04XNaOoeJMKvZnt/33kvGmrGVMICag8Cl9HMyy9SpQiAxdHG33v/lULMEY7ZHS2uem59uLDTTyyd02gZzWujuZbPI4peHSHyP9D7pBxqFpAjrsgLbNM0riScQCYjUYpCmS5DRYST1dxEG9PqHyVwce5Dmy44oqwbxToNRkD2zxPkmuuqQIDAQAB",
   "permissions": [
     "storage"
   ],
