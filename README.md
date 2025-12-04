@@ -185,6 +185,7 @@ Each app uses a separate profile, so configurations are completely isolated.
 
 7. **Preview & Save**
    - View live preview before saving
+
 ## 📁 File Structure
 
 ```
