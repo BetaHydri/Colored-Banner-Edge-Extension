@@ -73,7 +73,7 @@ Write-Host "2. Copy your GitHub repository URL (shown after creation)" -Foregrou
 Write-Host ""
 Write-Host "3. Run these commands:" -ForegroundColor White
 Write-Host "" 
-Write-Host "   git remote add origin https://github.com/BetaHydri/Red-Banner-Edge-Extension.git" -ForegroundColor Yellow
+Write-Host "   git remote add origin https://github.com/BetaHydri/Colored-Banner-Edge-Extension.git" -ForegroundColor Yellow
 Write-Host "   git branch -M main" -ForegroundColor Yellow
 Write-Host "   git push -u origin main" -ForegroundColor Yellow
 Write-Host ""

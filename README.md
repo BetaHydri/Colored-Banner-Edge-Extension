@@ -53,7 +53,7 @@ Users can instantly identify which browser instance they're using based on the c
 
 1. **Download or clone this repository**
    ```bash
-   git clone https://github.com/BetaHydri/Red-Banner-Edge-Extension.git
+   git clone https://github.com/BetaHydri/Colored-Banner-Edge-Extension.git
    ```
 
 2. **Open Edge and navigate to** `edge://extensions/`
