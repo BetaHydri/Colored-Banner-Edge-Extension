@@ -231,8 +231,7 @@ RedBanner-Extension/
 |   |-- deploy-published-app.ps1   # Terminal Server setup
 |   |-- launch-red-edge.ps1        # Launch with Red profile
 |   |-- launch-default-edge.ps1    # Launch without extension
-|   |-- uninstall.ps1              # Removal script
-|   `-- update-remote-url.ps1      # Git remote helper
+|   `-- uninstall.ps1              # Removal script
 |-- DEPLOYMENT.md                  # Enterprise deployment guide
 |-- RELEASE.md                     # Release creation guide (NEW)
 |-- TERMINAL-SERVER-SETUP.md       # Terminal Server configuration
@@ -365,10 +364,6 @@ Provides a user-friendly configuration interface:
 - Removes registry policies
 - Deletes local extension files
 - Clean uninstallation
-
-### update-remote-url.ps1
-- Updates git remote URLs
-- Useful for repository maintenance
 
 ## 📋 Requirements
 
