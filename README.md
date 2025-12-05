@@ -6,6 +6,10 @@ A highly customizable Microsoft Edge extension that displays a visible banner on
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Edge](https://img.shields.io/badge/Edge-Chromium-blue)
 ![Author](https://img.shields.io/badge/author-Jan%20Tiedemann-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?logo=powershell&logoColor=white)
 
 **Author:** Jan Tiedemann
 
