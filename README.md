@@ -40,11 +40,6 @@ Users can instantly identify which browser instance they're using based on the c
 
 ## 📸 Screenshots
 
-### Banner in Action
-![Customizable Banner](doc/Banner.png)
-
-*Banner displayed at the top of a webpage with custom colors and text*
-
 ### Configuration UI - Color Templates
 ![Banner Configuration - Templates](doc/BannerConfig1.png)
 
@@ -226,49 +221,34 @@ RedBanner-Extension/
 
 ### Banner Positions
 
-**Top Position (Default)**
-<pre>
-+----------------------------------+
-|  ● PRODUCTION - RED              | <-- Banner
-+----------------------------------+
-|  Website content                 |
-|                                  |
-+----------------------------------+
-</pre>
+The banner can be positioned in four different locations. Here are examples of each:
 
-**Bottom Position**
-<pre>
-+----------------------------------+
-|  Website content                 |
-|                                  |
-+----------------------------------+
-|  ● TESTING - BLUE                | <-- Banner
-+----------------------------------+
-</pre>
-
-**Left Side Position**
-<pre>
-+--+-----------------------------+
-| D|                             |
-| E|  Website content            |
-| V|                             |
-| ●|                             |
-+--+-----------------------------+
- ^
- Banner
-</pre>
-
-**Right Side Position**
-<pre>
-+-----------------------------+--+
-|                             |U |
-|  Website content            |A |
-|                             |T |
-|                             |● |
-+-----------------------------+--+
-                                ^
-                              Banner
-</pre>
+<table>
+  <tr>
+    <td width="50%">
+      <strong>Top Position</strong><br>
+      <img src="doc/Top.png" alt="Top Position" width="100%">
+      <em>Banner at the top of the page</em>
+    </td>
+    <td width="50%">
+      <strong>Bottom Position</strong><br>
+      <img src="doc/Buttom.png" alt="Bottom Position" width="100%">
+      <em>Banner at the bottom of the page</em>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <strong>Left Side Position</strong><br>
+      <img src="doc/Left.png" alt="Left Position" width="100%">
+      <em>Vertical banner on the left side</em>
+    </td>
+    <td width="50%">
+      <strong>Right Side Position</strong><br>
+      <img src="doc/Right.png" alt="Right Position" width="100%">
+      <em>Vertical banner on the right side</em>
+    </td>
+  </tr>
+</table>
 
 ### Advanced Customization (Manual)
 
