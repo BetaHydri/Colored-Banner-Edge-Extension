@@ -228,7 +228,7 @@ $buildDir = ".\build_temp"
 New-Item -ItemType Directory -Path $buildDir -Force
 
 # Copy only necessary files
-Copy-Item "manifest.json", "background.js", "content.js", "options.html", "options.js", "sidepanel.html" -Destination $buildDir
+Copy-Item "manifest.json", "background.js", "content.js", "options.html", "options.js" -Destination $buildDir
 Copy-Item "icons" -Destination $buildDir -Recurse
 
 # Package with Edge

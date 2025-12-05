@@ -209,7 +209,6 @@ RedBanner-Extension/
 |-- background.js                  # Background service worker & settings init
 |-- options.html                   # Configuration UI (NEW in v3.1.0)
 |-- options.js                     # Options page logic (NEW in v3.1.0)
-|-- sidepanel.html                 # Side panel UI (optional)
 |-- bin/                           # Build outputs (git ignored)
 |   |-- RedBanner.crx              # Signed extension package
 |   `-- RedBanner.pem              # Private key (NEVER distribute)

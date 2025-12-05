@@ -170,7 +170,6 @@ $filesToInclude = @(
     "content.js",
     "options.html",
     "options.js",
-    "sidepanel.html",
     "icons"
 )
 
