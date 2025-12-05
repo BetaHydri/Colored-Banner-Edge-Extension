@@ -225,27 +225,27 @@ The banner can be positioned in four different locations. Here are examples of e
 
 <table>
   <tr>
-    <td width="50%">
-      <strong>Top Position</strong><br>
-      <img src="doc/Top.png" alt="Top Position" width="100%">
-      <em>Banner at the top of the page</em>
+    <td align="center" width="50%">
+      <strong>Top Position</strong><br><br>
+      <img src="doc/Top.png" alt="Top Position" style="max-width:100%;">
+      <br><em>Banner at the top of the page</em>
     </td>
-    <td width="50%">
-      <strong>Bottom Position</strong><br>
-      <img src="doc/Buttom.png" alt="Bottom Position" width="100%">
-      <em>Banner at the bottom of the page</em>
+    <td align="center" width="50%">
+      <strong>Bottom Position</strong><br><br>
+      <img src="doc/Buttom.png" alt="Bottom Position" style="max-width:100%;">
+      <br><em>Banner at the bottom of the page</em>
     </td>
   </tr>
   <tr>
-    <td width="50%">
-      <strong>Left Side Position</strong><br>
-      <img src="doc/Left.png" alt="Left Position" width="100%">
-      <em>Vertical banner on the left side</em>
+    <td align="center" width="50%">
+      <strong>Left Side Position</strong><br><br>
+      <img src="doc/Left.png" alt="Left Position" style="max-width:100%;">
+      <br><em>Vertical banner on the left side</em>
     </td>
-    <td width="50%">
-      <strong>Right Side Position</strong><br>
-      <img src="doc/Right.png" alt="Right Position" width="100%">
-      <em>Vertical banner on the right side</em>
+    <td align="center" width="50%">
+      <strong>Right Side Position</strong><br><br>
+      <img src="doc/Right.png" alt="Right Position" style="max-width:100%;">
+      <br><em>Vertical banner on the right side</em>
     </td>
   </tr>
 </table>
