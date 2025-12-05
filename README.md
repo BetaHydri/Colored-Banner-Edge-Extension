@@ -40,15 +40,34 @@ Users can instantly identify which browser instance they're using based on the c
 
 ## 📸 Screenshots
 
-### Configuration UI - Color Templates
-![Banner Configuration - Templates](doc/BannerConfig1.png)
+### Configuration UI
 
-*Choose from 10 pre-built color templates or create your own*
-
-### Configuration UI - All Options
-![Banner Configuration - Full Options](doc/BannerConfig2.png)
-
-*Complete configuration interface with position, text, logo, and visibility controls*
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>Color Templates</strong><br><br>
+      <img src="doc/BannerConfig1.png" alt="Color Templates" style="max-width:100%;">
+      <br><em>Choose from 10 pre-built color templates</em>
+    </td>
+    <td align="center" width="50%">
+      <strong>All Configuration Options</strong><br><br>
+      <img src="doc/BannerConfig2.png" alt="Full Options" style="max-width:100%;">
+      <br><em>Complete interface with position, text, logo, and visibility</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>Change Options</strong><br><br>
+      <img src="doc/ChangeOptions.png" alt="Change Options" style="max-width:100%;">
+      <br><em>Easy-to-use controls for customization</em>
+    </td>
+    <td align="center" width="50%">
+      <strong>Custom Colors</strong><br><br>
+      <img src="doc/CustomColors.png" alt="Custom Colors" style="max-width:100%;">
+      <br><em>Create unlimited custom color combinations</em>
+    </td>
+  </tr>
+</table>
 
 ## 🚀 Quick Start
 
