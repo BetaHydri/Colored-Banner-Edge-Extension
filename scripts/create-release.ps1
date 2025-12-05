@@ -28,10 +28,10 @@
 
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [string]$Version,
     
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [string]$OutputPath = ".\bin\RedBanner.crx"
 )
 
@@ -81,9 +81,9 @@ try {
         
         # Extract public key
         $pemContent = Get-Content $pemPath -Raw
-        $base64Key = $pemContent -replace "-----BEGIN PRIVATE KEY-----","" `
-                                 -replace "-----END PRIVATE KEY-----","" `
-                                 -replace "`n","" -replace "`r","" -replace " ",""
+        $base64Key = $pemContent -replace "-----BEGIN PRIVATE KEY-----", "" `
+            -replace "-----END PRIVATE KEY-----", "" `
+            -replace "`n", "" -replace "`r", "" -replace " ", ""
         
         $privateKeyBytes = [System.Convert]::FromBase64String($base64Key)
         $rsa = [System.Security.Cryptography.RSA]::Create()
@@ -95,10 +95,12 @@ try {
         $manifest | Add-Member -NotePropertyName "key" -NotePropertyValue $publicKeyBase64 -Force
         $manifest | ConvertTo-Json -Depth 10 | Set-Content $manifestPath
         Write-Success "Added public key to manifest.json"
-    } else {
+    }
+    else {
         Write-Success "Public key present in manifest.json"
     }
-} catch {
+}
+catch {
     Write-Failure "Failed to read manifest.json: $_"
     exit 1
 }
@@ -111,7 +113,8 @@ if ($Version) {
         $manifest | ConvertTo-Json -Depth 10 | Set-Content $manifestPath
         Write-Success "Version updated to $Version"
         $currentVersion = $Version
-    } catch {
+    }
+    catch {
         Write-Failure "Failed to update version: $_"
         exit 1
     }
@@ -180,11 +183,13 @@ foreach ($file in $filesToInclude) {
     if (Test-Path $sourcePath) {
         if ((Get-Item $sourcePath) -is [System.IO.DirectoryInfo]) {
             Copy-Item $sourcePath -Destination $buildDir -Recurse -Force
-        } else {
+        }
+        else {
             Copy-Item $sourcePath -Destination $buildDir -Force
         }
         Write-Host "  ✓ $file" -ForegroundColor Gray
-    } else {
+    }
+    else {
         Write-Warning "File not found: $file"
     }
 }
@@ -223,7 +228,8 @@ try {
         # Move to output location
         Move-Item $tempCrx $OutputPath -Force
         Write-Success "Extension packaged successfully"
-    } else {
+    }
+    else {
         Write-Failure "CRX file was not created."
         Write-Info "Trying alternative packaging method..."
         
@@ -241,7 +247,8 @@ try {
     Remove-Item $buildDir -Recurse -Force
     Write-Success "Build directory cleaned"
     
-} catch {
+}
+catch {
     Write-Failure "Packaging error: $_"
     if (Test-Path $buildDir) {
         Remove-Item $buildDir -Recurse -Force
@@ -256,7 +263,8 @@ if (Test-Path $OutputPath) {
     Write-Success "CRX created: $OutputPath"
     Write-Host "  Size: $([math]::Round($crxInfo.Length / 1KB, 2)) KB" -ForegroundColor Gray
     Write-Host "  Modified: $($crxInfo.LastWriteTime)" -ForegroundColor Gray
-} else {
+}
+else {
     Write-Failure "Output file not found: $OutputPath"
     exit 1
 }
@@ -265,9 +273,9 @@ if (Test-Path $OutputPath) {
 Write-Info "Calculating Extension ID..."
 try {
     $pemContent = Get-Content $pemPath -Raw
-    $base64Key = $pemContent -replace "-----BEGIN PRIVATE KEY-----","" `
-                             -replace "-----END PRIVATE KEY-----","" `
-                             -replace "`n","" -replace "`r","" -replace " ",""
+    $base64Key = $pemContent -replace "-----BEGIN PRIVATE KEY-----", "" `
+        -replace "-----END PRIVATE KEY-----", "" `
+        -replace "`n", "" -replace "`r", "" -replace " ", ""
     
     $privateKeyBytes = [System.Convert]::FromBase64String($base64Key)
     $rsa = [System.Security.Cryptography.RSA]::Create()
@@ -287,7 +295,8 @@ try {
     Write-Success "Extension ID: $extensionId"
     Write-Host "  (Verify this matches in edge://extensions/)" -ForegroundColor Gray
     
-} catch {
+}
+catch {
     Write-Warning "Could not calculate Extension ID: $_"
 }
 
