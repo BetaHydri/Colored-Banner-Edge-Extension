@@ -217,7 +217,7 @@ RedBanner-Extension/
 |-- TERMINAL-SERVER-SETUP.md       # Terminal Server configuration
 |-- MULTI-APP-CONFIGURATION.md     # Multi-app profile setup
 `-- README.md                      # This file
-</pre>
+```
 
 ### Banner Positions
 
