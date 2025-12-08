@@ -221,9 +221,14 @@ RedBanner-Extension/
 |   |-- icon48.png
 |   `-- icon128.png
 |-- doc/                           # Screenshots
-|   |-- Banner.png
-|   |-- BannerConfig1.png
-|   `-- BannerConfig2.png
+|   |-- BannerConfig1.png          # Config UI - Color templates
+|   |-- BannerConfig2.png          # Config UI - All options
+|   |-- ChangeOptions.png          # Config UI - Change options
+|   |-- CustomColors.png           # Config UI - Custom colors
+|   |-- Top.png                    # Banner position - Top
+|   |-- Buttom.png                 # Banner position - Bottom
+|   |-- Left.png                   # Banner position - Left side
+|   `-- Right.png                  # Banner position - Right side
 |-- scripts/                       # PowerShell automation scripts
 |   |-- create-release.ps1         # Create signed CRX package
 |   |-- extract-public-key.ps1     # Extract public key from PEM
