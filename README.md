@@ -2,7 +2,7 @@
 
 A highly customizable Microsoft Edge extension that displays a visible banner on every webpage. Perfect for Terminal Server environments where you need to visually distinguish between different published Edge applications with full configuration options.
 
-![Version](https://img.shields.io/badge/version-3.1.0-red)
+![Version](https://img.shields.io/badge/version-3.2.0-red)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Edge](https://img.shields.io/badge/Edge-Chromium-blue)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
@@ -40,6 +40,12 @@ Users can instantly identify which browser instance they're using based on the c
 - ✨ **Custom Text** - Personalize banner text for each environment
 - ✨ **Custom Colors** - Use color picker for unlimited color combinations
 - ✨ **Live Preview** - See changes before saving
+
+### 🌈 NEW: Color Animation (v3.2.0)
+- ✨ **Gradient Cycling** - Smooth color transitions between primary and secondary colors
+- ✨ **Adjustable Speed** - Choose from slow (10s), medium (5s), or fast (3s) animation speeds
+- ✨ **Toggle Control** - Enable/disable animation without changing other settings
+- ✨ **Live Preview** - See animation in action before applying
 
 ## 📸 Screenshots
 
@@ -200,7 +206,12 @@ Each app uses a separate profile, so configurations are completely isolated.
 6. **Toggle Visibility**
    - Hide/show banner without losing your configuration
 
-7. **Preview & Save**
+7. **Enable Color Animation (Optional)**
+   - Toggle animation on/off
+   - Select animation speed (slow, medium, or fast)
+   - Colors will smoothly cycle in a gradient effect
+
+8. **Preview & Save**
    - View live preview before saving
 
 ## 📁 File Structure
@@ -459,14 +470,21 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - [x] Additional banner positions (bottom, side) ✅ v3.1.0
 - [x] Banner hide/show toggle ✅ v3.1.0
 - [x] Custom logo support ✅ v3.1.0
-- [ ] Banner animation options
+- [x] Banner color animation options ✅ v3.2.0
 - [ ] Export/Import configuration
 - [ ] Keyboard shortcut to toggle banner
 - [ ] Multiple banner profiles per Edge profile
 
 ## 📊 Version History
 
-### v3.1.0 (Current - December 2025)
+### v3.2.0 (Current - December 2025)
+- ✨ **NEW:** Color animation with gradient cycling
+- ✨ **NEW:** Adjustable animation speed (slow, medium, fast)
+- ✨ **NEW:** Animation toggle control
+- 🔧 Improved: Live preview now shows animation effects
+- 📚 Documentation: Updated customization guide with animation options
+
+### v3.1.0 (December 2025)
 - ✨ **NEW:** Configuration UI with options page
 - ✨ **NEW:** 10 pre-built color templates
 - ✨ **NEW:** Multiple banner positions (top, bottom, left, right)

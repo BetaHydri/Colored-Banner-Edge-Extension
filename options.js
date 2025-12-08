@@ -40,6 +40,8 @@ const colorTemplates = [
  * @property {string} bannerText - Text displayed in the banner
  * @property {string|null} logoData - Base64 encoded logo image data
  * @property {string} selectedTemplate - Name of the selected color template
+ * @property {boolean} animationEnabled - Whether color animation is active
+ * @property {string} animationSpeed - Animation speed ('slow', 'medium', 'fast')
  */
 const defaultSettings = {
   visible: true,
@@ -48,12 +50,17 @@ const defaultSettings = {
   position: 'top',
   bannerText: 'Internet Farm',
   logoData: null,
-  selectedTemplate: 'Red Alert'
+  selectedTemplate: 'Red Alert',
+  animationEnabled: false,
+  animationSpeed: 'medium'
 };
 
 // DOM elements
 const visibilityToggle = document.getElementById('visibilityToggle');
 const visibilityLabel = document.getElementById('visibilityLabel');
+const animationToggle = document.getElementById('animationToggle');
+const animationLabel = document.getElementById('animationLabel');
+const animationSpeedSelect = document.getElementById('animationSpeed');
 const templatesContainer = document.getElementById('templates');
 const primaryColorInput = document.getElementById('primaryColor');
 const secondaryColorInput = document.getElementById('secondaryColor');
@@ -125,6 +132,11 @@ function applySettingsToUI() {
   // Visibility toggle
   visibilityToggle.classList.toggle('active', currentSettings.visible);
   visibilityLabel.textContent = currentSettings.visible ? 'Banner Visible' : 'Banner Hidden';
+  
+  // Animation toggle
+  animationToggle.classList.toggle('active', currentSettings.animationEnabled);
+  animationLabel.textContent = currentSettings.animationEnabled ? 'Animation Enabled' : 'Animation Disabled';
+  animationSpeedSelect.value = currentSettings.animationSpeed || 'medium';
   
   // Colors
   primaryColorInput.value = currentSettings.primaryColor;
@@ -209,6 +221,8 @@ function selectTemplate(template) {
  * Sets up all event listeners for interactive UI elements
  * Handles:
  * - Visibility toggle clicks
+ * - Animation toggle clicks
+ * - Animation speed changes
  * - Color picker changes (switches to 'Custom' template)
  * - Position dropdown changes
  * - Banner text input
@@ -225,6 +239,20 @@ function setupEventListeners() {
     currentSettings.visible = !currentSettings.visible;
     visibilityToggle.classList.toggle('active');
     visibilityLabel.textContent = currentSettings.visible ? 'Banner Visible' : 'Banner Hidden';
+    updatePreview();
+  });
+  
+  // Animation toggle
+  animationToggle.addEventListener('click', () => {
+    currentSettings.animationEnabled = !currentSettings.animationEnabled;
+    animationToggle.classList.toggle('active');
+    animationLabel.textContent = currentSettings.animationEnabled ? 'Animation Enabled' : 'Animation Disabled';
+    updatePreview();
+  });
+  
+  // Animation speed
+  animationSpeedSelect.addEventListener('change', (e) => {
+    currentSettings.animationSpeed = e.target.value;
     updatePreview();
   });
   
@@ -322,7 +350,24 @@ function updatePreview() {
   }
   
   previewBanner.style.opacity = '1';
-  previewBanner.style.background = `linear-gradient(90deg, ${currentSettings.primaryColor} 0%, ${currentSettings.secondaryColor} 100%)`;
+  
+  // Apply animation if enabled
+  if (currentSettings.animationEnabled) {
+    const speeds = {
+      slow: '10s',
+      medium: '5s',
+      fast: '3s'
+    };
+    const duration = speeds[currentSettings.animationSpeed] || '5s';
+    
+    previewBanner.style.background = `linear-gradient(90deg, ${currentSettings.primaryColor}, ${currentSettings.secondaryColor}, ${currentSettings.primaryColor})`;
+    previewBanner.style.backgroundSize = '200% 100%';
+    previewBanner.style.animation = `gradientCycle ${duration} ease infinite`;
+  } else {
+    previewBanner.style.background = `linear-gradient(90deg, ${currentSettings.primaryColor} 0%, ${currentSettings.secondaryColor} 100%)`;
+    previewBanner.style.backgroundSize = 'auto';
+    previewBanner.style.animation = 'none';
+  }
   
   // Update logo
   if (currentSettings.logoData) {

@@ -45,6 +45,8 @@ chrome.runtime.onInstalled.addListener(async (details) => {
      * @property {string} bannerText - Default text shown in banner
      * @property {string|null} logoData - Base64 logo data (null = no logo)
      * @property {string} selectedTemplate - Name of the default color template
+     * @property {boolean} animationEnabled - Whether color animation is active (false by default)
+     * @property {string} animationSpeed - Animation speed ('slow', 'medium', 'fast')
      */
     const defaultSettings = {
       visible: true,
@@ -53,7 +55,9 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       position: 'top',
       bannerText: 'Internet Farm',
       logoData: null,
-      selectedTemplate: 'Red Alert'
+      selectedTemplate: 'Red Alert',
+      animationEnabled: false,
+      animationSpeed: 'medium'
     };
     
     try {

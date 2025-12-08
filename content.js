@@ -32,6 +32,8 @@
    * @property {string} position - Banner position on page
    * @property {string} bannerText - Text to display in banner
    * @property {string|null} logoData - Base64 encoded logo image
+   * @property {boolean} animationEnabled - Whether color animation is active
+   * @property {string} animationSpeed - Animation speed ('slow', 'medium', 'fast')
    */
   const defaultSettings = {
     visible: true,
@@ -39,7 +41,9 @@
     secondaryColor: '#cc0000',
     position: 'top',
     bannerText: 'Internet Farm',
-    logoData: null
+    logoData: null,
+    animationEnabled: false,
+    animationSpeed: 'medium'
   };
 
   /**
@@ -107,6 +111,7 @@
    * Generates complete CSS styles for the banner
    * Combines base styles with position-specific styles
    * Handles all four positions: top, bottom, left, right
+   * Supports color animation when enabled
    * 
    * @function getBannerStyles
    * @returns {object} Object containing style strings for banner elements
@@ -117,10 +122,32 @@
    * @returns {string} returns.animation - CSS keyframe animations
    */
   function getBannerStyles() {
+    // Determine animation settings
+    const speeds = {
+      slow: '10s',
+      medium: '5s',
+      fast: '3s'
+    };
+    const animationDuration = speeds[settings.animationSpeed] || '5s';
+    
+    // Build background style with optional animation
+    let backgroundStyle;
+    if (settings.animationEnabled) {
+      backgroundStyle = `
+        background: linear-gradient(90deg, ${settings.primaryColor}, ${settings.secondaryColor}, ${settings.primaryColor});
+        background-size: 200% 100%;
+        animation: gradientCycle ${animationDuration} ease infinite;
+      `;
+    } else {
+      backgroundStyle = `
+        background: linear-gradient(90deg, ${settings.primaryColor} 0%, ${settings.secondaryColor} 100%);
+      `;
+    }
+    
     const baseStyles = {
       common: `
         position: fixed;
-        background: linear-gradient(90deg, ${settings.primaryColor} 0%, ${settings.secondaryColor} 100%);
+        ${backgroundStyle}
         color: white;
         display: flex;
         align-items: center;
@@ -156,6 +183,17 @@
         @keyframes blink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.3; }
+        }
+        @keyframes gradientCycle {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
         }
       `
     };

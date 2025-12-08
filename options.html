@@ -367,6 +367,18 @@
       color: #1565c0;
       margin-top: 10px;
     }
+
+    @keyframes gradientCycle {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -462,6 +474,29 @@
         </div>
         <div class="info-box">
           Logo will be displayed alongside your banner text. Recommended size: 40x40px
+        </div>
+      </div>
+
+      <!-- Color Animation -->
+      <div class="section">
+        <div class="section-title">
+          <span class="icon">✨</span>
+          <span>Color Animation</span>
+        </div>
+        <div class="toggle-container">
+          <div class="toggle-switch" id="animationToggle"></div>
+          <span class="toggle-label" id="animationLabel">Animation Disabled</span>
+        </div>
+        <div class="form-group" style="margin-top: 15px;">
+          <label>Animation Speed</label>
+          <select id="animationSpeed">
+            <option value="slow">Slow (10 seconds)</option>
+            <option value="medium">Medium (5 seconds)</option>
+            <option value="fast">Fast (3 seconds)</option>
+          </select>
+        </div>
+        <div class="info-box">
+          Enable smooth color cycling animation on the banner gradient. The colors will transition continuously between primary and secondary colors.
         </div>
       </div>
 
