@@ -489,24 +489,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### v2.0.0
 - Initial release
-- Basic theme switchingtoggle
-- [ ] Custom logo support
-- [ ] Banner animation options
-
-## 📊 Version History
-
-### v3.0.0 (Current)
-- Red banner overlay implementation
-- Automatic injection on all pages
-- Terminal Server deployment scripts
-- Enterprise deployment guides
-
-### v2.1.0
-- Side panel implementation
-- Auto-open on startup
-
-### v2.0.0
-- Initial release
 - Basic theme switching
 
 ---
