@@ -47,6 +47,11 @@ Users can instantly identify which browser instance they're using based on the c
 - ✨ **Toggle Control** - Enable/disable animation without changing other settings
 - ✨ **Live Preview** - See animation in action before applying
 
+<p align="center">
+  <img src="doc/Animation.gif" alt="Banner Color Animation" width="80%">
+  <br><em><strong>NEW in v3.2.0:</strong> Smooth gradient cycling animation</em>
+</p>
+
 ## 📸 Screenshots
 
 ### Configuration UI
@@ -231,6 +236,7 @@ RedBanner-Extension/
 |   |-- icon48.png
 |   `-- icon128.png
 |-- doc/                           # Screenshots
+|   |-- Animation.gif              # Color animation demo (v3.2.0)
 |   |-- BannerConfig1.png          # Config UI - Color templates
 |   |-- BannerConfig2.png          # Config UI - All options
 |   |-- ChangeOptions.png          # Config UI - Change options
